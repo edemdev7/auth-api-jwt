@@ -3,7 +3,7 @@
 
 # Environment file
 .env
-
+plan.md
 # OS-specific files
 .DS_Store
 Thumbs.db
