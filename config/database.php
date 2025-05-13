@@ -3,10 +3,10 @@
 // Charger les variables d'environnement
 $env = parse_ini_file(__DIR__ . '/../.env');
 
-$host = isset($env['DB_HOST']) ? $env['DB_HOST'] : '127.0.0.1';
-$db   = isset($env['DB_NAME']) ? $env['DB_NAME'] : 'auth_db';
-$user = isset($env['DB_USER']) ? $env['DB_USER'] : 'root';
-$pass = isset($env['DB_PASSWORD']) ? $env['DB_PASSWORD'] : '';
+$host = $env['DB_HOST'] ?? '127.0.0.1';
+$db   = $env['DB_NAME'] ?? 'auth_db';
+$user = $env['DB_USER'] ?? '';
+$pass = $env['DB_PASSWORD'] ?? '';
 $charset = 'utf8';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
