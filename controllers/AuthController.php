@@ -2,14 +2,15 @@
 
 namespace App\controllers;
 
+use AllowDynamicProperties;
 use App\core\JWT;
 use PDOException;
-use User;
+use App\models\User;
 
-class AuthController {
-    private User $userModel;
+#[AllowDynamicProperties] class AuthController {
 
     public function __construct() {
+        require_once __DIR__ . '/../config/database.php';
         global $pdo;
         $this->userModel = new User($pdo);
     }

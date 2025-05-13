@@ -4,7 +4,7 @@ namespace App\controllers;
 
 use App\middleware\AuthMiddleware;
 use Exception;
-use User;
+use App\models\User;
 
 class UserController {
     private User $userModel;
