@@ -1,8 +1,3 @@
-Parfait ! Voici un exemple de fichier `README.md` clair, structuré, et adapté à ton projet **auth-api-jwt** en PHP natif :
-
----
-
-````md
 # Auth API JWT – Projet d’authentification en PHP 8.3
 
 Une API REST d’authentification simple et sécurisée basée sur JSON Web Tokens (JWT), développée sans framework (ni Laravel, ni Symfony), en suivant l'architecture MVC.
@@ -166,32 +161,3 @@ Tu peux démarrer le serveur local avec PHP :
 php -S localhost:8000 -t public
 ```
 
----
-
-## 📝 À faire
-
-* [x] Authentification JWT
-* [x] Middleware JWT
-* [x] API REST JSON
-* [ ] Tests unitaires
-* [ ] Pagination des utilisateurs (bonus)
-
----
-
-## 👤 Auteur
-
-**Edem Kpomachi**
-GitHub : [@edemdev7](https://github.com/edemdev7)
-
----
-
-## 📄 Licence
-
-Ce projet est open-source, libre d’utilisation et de modification.
-
-```
-
----
-
-Souhaite-tu aussi un `Makefile` ou un alias Bash pour lancer les commandes plus rapidement ?
-```
