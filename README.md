@@ -17,7 +17,7 @@ Une API REST d’authentification simple et sécurisée basée sur JSON Web Toke
 
 ### 1. Cloner le projet
 ```bash
-git clone https://github.com/ton-utilisateur/auth-api-jwt.git
+git clone https://github.com/edemdev7/auth-api-jwt.git
 cd auth-api-jwt
 ````
 
@@ -28,6 +28,16 @@ cp .env.example .env
 ```
 
 Remplir les informations de connexion à la base de données dans le fichier `.env`.
+```bash
+DB_HOST=localhost
+DB_NAME=auth_db 
+DB_USER=votre_user
+DB_PASS=votre_password
+JWT_SECRET=votre_secret_key
+JWT_EXPIRE=300 # 5 minutes en secondes
+```
+
+
 
 ### 3. Installer les dépendances
 
@@ -86,6 +96,20 @@ Toutes les requêtes et réponses sont en **JSON**.
   "password": "password123"
 }
 ```
+**Responses :**
+- `201 Created`
+```json
+{
+  "message": "Votre compte a été créé avec succès"
+}
+```
+- `400 Bad Request`
+```json
+{
+  "status": "error",
+  "message": "Email et mot de passe requis"
+}
+```
 
 ---
 
@@ -101,13 +125,26 @@ Toutes les requêtes et réponses sont en **JSON**.
 ```
 
 **Réponse :**
+- `200 OK`
+
 
 ```json
-{
-  "token": "eyJ0eXAiOiJKV1QiLCJh..."
+{ "status": "success", 
+  "message": "Connexion réussie",
+  "data": { "token": "eyJhbGciOiJIUzI1NiIs...",
+          "user": { "id": 1, 
+                  "email": "user@example.com"
+          }
+  }
 }
 ```
+- `401 Unauthorized`
+```json
+{ "status": "error",
+  "message": "Le mot de passe ou mail incorrect"
+}
 
+```
 ---
 
 ### ✅ Mettre à jour le nom et prénom
@@ -128,6 +165,19 @@ X-AUTH-TOKEN: <jwt_token>
   "last_name": "Dupont"
 }
 ```
+**Response :**
+-`200 OK`
+```json
+{
+    "message": "Profil mis à jour avec succès"
+}
+```
+-`401 OK`
+```json
+{
+    "message": "Toekn invalide ou expiré"
+}
+```
 
 ---
 
@@ -142,6 +192,7 @@ X-AUTH-TOKEN: <jwt_token>
 ```
 
 **Réponse :**
+-`200 OK`
 
 ```json
 {
@@ -150,7 +201,12 @@ X-AUTH-TOKEN: <jwt_token>
   "last_name": "Dupont"
 }
 ```
-
+-`401 OK`
+```json
+{
+    "message": "Toekn invalide ou expiré"
+}
+```
 ---
 
 ## 🛠 Développement local
