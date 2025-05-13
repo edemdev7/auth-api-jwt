@@ -2,22 +2,30 @@
 
 namespace App\core;
 
+use Exception;
 use Firebase\JWT\JWT as FirebaseJWT;
 use Firebase\JWT\Key;
 
 class JWT {
-    private static string $key = 'votre_clé_secrète'; // À mettre dans le .env en production
-
-    public static function encode(array $payload): string {
-        $payload['exp'] = time() + 300; // 5 minutes
-        return FirebaseJWT::encode($payload, self::$key, 'HS256');
+    private static function getKey(): string {
+        $env = parse_ini_file(__DIR__ . '/../.env');
+        return $env['JWT_SECRET'] ?? 'clé_par_défaut';
     }
 
+    public static function encode(array $payload): string {
+        $expireTime = parse_ini_file(__DIR__ . '/../.env')['JWT_EXPIRE'] ?? 300;
+        $payload['exp'] = time() + (int)$expireTime;
+        return FirebaseJWT::encode($payload, self::getKey(), 'HS256');
+    }
+
+    /**
+     * @throws Exception
+     */
     public static function decode(string $token): object {
         try {
-            return FirebaseJWT::decode($token, new Key(self::$key, 'HS256'));
-        } catch (\Exception $e) {
-            throw new \Exception('Token invalide');
+            return FirebaseJWT::decode($token, new Key(self::getKey(), 'HS256'));
+        } catch (Exception $e) {
+            throw new Exception('Token invalide' . ' ' . $e->getMessage(), 401, $e);;
         }
     }
 }

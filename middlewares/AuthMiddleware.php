@@ -1,6 +1,6 @@
 <?php
 
-namespace App\middleware;
+namespace App\middlewares;
 
 use App\core\JWT;
 

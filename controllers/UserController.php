@@ -2,7 +2,7 @@
 
 namespace App\controllers;
 
-use App\middleware\AuthMiddleware;
+use App\middlewares\AuthMiddleware;
 use Exception;
 use App\models\User;
 

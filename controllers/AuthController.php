@@ -10,7 +10,6 @@ use App\models\User;
 #[AllowDynamicProperties] class AuthController {
 
     public function __construct() {
-        require_once __DIR__ . '/../config/database.php';
         global $pdo;
         $this->userModel = new User($pdo);
     }
@@ -38,10 +37,10 @@ use App\models\User;
         try {
             if ($this->userModel->create($email, $data['password'])) {
                 http_response_code(201);
-                echo json_encode(['message' => 'Utilisateur créé avec succès']);
+                echo json_encode(['message' => 'Votre compte a été créé avec succès']);
             } else {
                 http_response_code(500);
-                echo json_encode(['error' => 'Erreur lors de la création de l\'utilisateur']);
+                echo json_encode(['error' => 'Erreur lors de  de l\'inscription']);
             }
         } catch (PDOException $e) {
             http_response_code(400);
@@ -52,21 +51,39 @@ use App\models\User;
     /**
      * Gère la connexion d'un utilisateur
      */
+    /**
+     * Gère la connexion d'un utilisateur
+     */
     public function login(): void
     {
         $data = json_decode(file_get_contents('php://input'), true);
 
         if (!isset($data['email']) || !isset($data['password'])) {
             http_response_code(400);
-            echo json_encode(['error' => 'Email et mot de passe requis']);
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'L\'adresse email et le mot de passe sont requis'
+            ]);
             return;
         }
 
         $user = $this->userModel->findByEmail($data['email']);
 
-        if (!$user || !password_verify($data['password'], $user['password'])) {
+        if (!$user) {
             http_response_code(401);
-            echo json_encode(['error' => 'Identifiants invalides']);
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Cette adresse email n\'existe pas'
+            ]);
+            return;
+        }
+
+        if (!password_verify($data['password'], $user['password'])) {
+            http_response_code(401);
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Le mot de passe est incorrect'
+            ]);
             return;
         }
 
@@ -75,6 +92,17 @@ use App\models\User;
             'email' => $user['email']
         ]);
 
-        echo json_encode(['token' => $token]);
+        http_response_code(200);
+        echo json_encode([
+            'status' => 'success',
+            'message' => 'Connexion réussie',
+            'data' => [
+                'token' => $token,
+                'user' => [
+                    'id' => $user['id'],
+                    'email' => $user['email']
+                ]
+            ]
+        ]);
     }
 }
