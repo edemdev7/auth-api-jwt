@@ -1,2 +1,25 @@
+# Composer dependencies
+/vendor/
+
+# Environment file
 .env
-vendor/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+*.swp
+*.swo
+*.bak
+*.tmp
+*.log
+.vscode/
+.idea/
+
+# PHPStorm specific
+/.idea/
+
+# PHPUnit
+phpunit.xml
+phpunit.xml.dist
