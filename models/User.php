@@ -9,9 +9,9 @@ class User
     private PDO $db;
 
     /**
-     * Constructor method.
+     * Méthode constructeur.
      *
-     * @param PDO $pdo The PDO instance used for database interaction.
+     * @param PDO $pdo L'instance PDO utilisée pour l'interaction avec la base de données.
      * @return void
      */
 
@@ -21,11 +21,11 @@ class User
     }
 
     /**
-     * Creates a new user record in the database.
+     * Crée un nouveau enregistrement utilisateur dans la base de données.
      *
-     * @param string $email The email address of the user.
-     * @param string $password The plain text password of the user.
-     * @return bool Returns true on successful insertion, false otherwise.
+     * @param string $email L'adresse électronique de l'utilisateur.
+     * @param string $password Le mot de passe en clair de l'utilisateur.
+     * @return bool Retourne vrai en cas d'insertion réussie, faux sinon.
      */
     public function create(string $email, string $password): bool
     {
@@ -39,7 +39,7 @@ class User
     }
 
     /**
-     * Retrieves a user record from the database based on the given email address.
+     * Récupère un enregistrement utilisateur dans la base de données en fonction de l'adresse électronique fournie.
      * @param string $email
      * @return array|null
      */
@@ -54,7 +54,7 @@ class User
     }
 
     /**
-     * Updates the names of a user record in the database.
+     * Met à jour les noms d'un enregistrement utilisateur dans la base de données.
      * @param int $id
      * @param string $firstName
      * @param string $lastName
@@ -72,9 +72,9 @@ class User
     }
 
     /**
-     * Retrieves a user record from the database based on the given ID.
-     * @param int $id The ID of the user to find.
-     * @return array|null An associative array containing user details if found, or null if no user is found.
+     * Récupère un enregistrement utilisateur de la base de données en fonction de l'ID fourni.
+     * @param int $id L'ID de l'utilisateur à trouver.
+     * @return array|null Un tableau associatif contenant les détails de l'utilisateur s'il est trouvé, ou null si aucun utilisateur n'est trouvé.
      */
     public function findById(int $id): ?array
     {

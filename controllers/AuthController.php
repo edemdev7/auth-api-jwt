@@ -49,10 +49,9 @@ use App\models\User;
     }
 
     /**
-     * Gère la connexion d'un utilisateur
-     */
-    /**
-     * Gère la connexion d'un utilisateur
+     * Authentifie un utilisateur en vérifiant ses identifiants (email et mot de passe).
+     *
+     * @return void
      */
     public function login(): void
     {
@@ -66,9 +65,9 @@ use App\models\User;
             ]);
             return;
         }
-
+        // recherchez si un utilisateur existe avec cette adresse email
         $user = $this->userModel->findByEmail($data['email']);
-
+        // renvoyez une erreur si l'utilisateur n'existe pas
         if (!$user) {
             http_response_code(401);
             echo json_encode([
@@ -77,7 +76,7 @@ use App\models\User;
             ]);
             return;
         }
-
+        // renvoyez une erreur si le mot de passe est incorrect
         if (!password_verify($data['password'], $user['password'])) {
             http_response_code(401);
             echo json_encode([
@@ -87,12 +86,14 @@ use App\models\User;
             return;
         }
 
+        // envoyez un jeton JWT avec les informations de l'utilisateur'
         $token = JWT::encode([
             'user_id' => $user['id'],
             'email' => $user['email']
         ]);
 
         http_response_code(200);
+        // retourner les informations de l'utilisateur et le jeton JWT'
         echo json_encode([
             'status' => 'success',
             'message' => 'Connexion réussie',

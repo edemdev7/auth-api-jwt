@@ -15,10 +15,15 @@ class UserController {
     }
 
     /**
-     * Mise à jour des informations personnelles de l'utilisateur
+     * Met à jour le profil de l'utilisateur avec les données fournies.
+     *Cette méthode authentifie l'utilisateur et valide les données de saisie (firstname et lastname).
+     * Si elles sont valides, elle tente de mettre à jour le profil de l'utilisateur dans la base de données.
+     * Les réponses sont envoyées au format JSON, avec les codes de statut HTTP appropriés en fonction du résultat de l'opération.
+     * @return void
      */
     public function updateProfile(): void
     {
+
         $payload = AuthMiddleware::authenticate();
         $data = json_decode(file_get_contents('php://input'), true);
 
