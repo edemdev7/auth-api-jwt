@@ -1,8 +1,8 @@
-# Auth API JWT – Projet d’authentification en PHP 8.3
+# Auth API JWT – API d’authentification en PHP 8.3
 
-Une API REST d’authentification simple et sécurisée basée sur JSON Web Tokens (JWT), développée sans framework (ni Laravel, ni Symfony), en suivant l'architecture MVC.
+Une API REST d’authentification simple et sécurisée basée sur JWT, développée sans framework , en suivant l'architecture MVC.
 
-## 🔧 Stack technique
+##  Stack technique
 
 - **Langage :** PHP 8.3 (Programmation orientée objet)
 - **Base de données :** MySQL 8.0
@@ -13,7 +13,7 @@ Une API REST d’authentification simple et sécurisée basée sur JSON Web Toke
 
 ---
 
-## 🚀 Installation
+##  Installation
 
 ### 1. Cloner le projet
 ```bash
@@ -63,7 +63,7 @@ composer migrate
 
 ---
 
-## 📦 Structure du projet
+##  Structure du projet
 
 ```
 auth-api-jwt/
@@ -71,7 +71,7 @@ auth-api-jwt/
 ├── controllers/         # Contrôleurs (AuthController, etc.)
 ├── core/                # Classes système (Router, Request, JWT, etc.)
 ├── middlewares/         # Middlewares personnalisés (AuthMiddleware, etc.)
-├── migrations/          # Fichier SQL (schema.sql)
+├── sql/          # Fichier SQL (schema.sql)
 ├── models/              # Modèles (User.php)
 ├── public/              # Point d’entrée (index.php)
 ├── .env                 # Variables d’environnement
@@ -82,11 +82,11 @@ auth-api-jwt/
 
 ---
 
-## 🔐 Endpoints de l’API
+##  Endpoints de l’API
 
 Toutes les requêtes et réponses sont en **JSON**.
 
-### ✅ Inscription
+###  Inscription
 
 `POST /register`
 
@@ -113,7 +113,7 @@ Toutes les requêtes et réponses sont en **JSON**.
 
 ---
 
-### ✅ Connexion
+###  Connexion
 
 `POST /login`
 
@@ -147,7 +147,7 @@ Toutes les requêtes et réponses sont en **JSON**.
 ```
 ---
 
-### ✅ Mettre à jour le nom et prénom
+###  Mettre à jour le nom et prénom
 
 `PUT /me`
 
@@ -181,7 +181,7 @@ X-AUTH-TOKEN: <jwt_token>
 
 ---
 
-### ✅ Voir les informations de l’utilisateur
+### Voir les informations de l’utilisateur
 
 `GET /me`
 
@@ -209,7 +209,7 @@ X-AUTH-TOKEN: <jwt_token>
 ```
 ---
 
-## 🛠 Développement local
+##  Développement local
 
 Tu peux démarrer le serveur local avec PHP :
 
